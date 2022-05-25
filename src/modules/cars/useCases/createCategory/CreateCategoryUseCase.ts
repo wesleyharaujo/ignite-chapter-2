@@ -5,18 +5,18 @@ interface IRequest {
   description: string;
 }
 
-class CreateCategoryService {
-  constructor(private categoryRepository: ICategoriesRepository) {}
+class CreateCategoryUseCase {
+  constructor(private categoriesRepository: ICategoriesRepository) {}
 
   execute({ name, description }: IRequest): void {
-    const categoryAlreadyExists = this.categoryRepository.findByName(name);
+    const categoryAlreadyExists = this.categoriesRepository.findByName(name);
 
     if (categoryAlreadyExists) {
       throw new Error("Category already exists!");
     }
 
-    this.categoryRepository.create({ name, description });
+    this.categoriesRepository.create({ name, description });
   }
 }
 
-export { CreateCategoryService };
+export { CreateCategoryUseCase };
